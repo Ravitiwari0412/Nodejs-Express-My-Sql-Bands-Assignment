@@ -1,0 +1,33 @@
+{
+  "name": "final_bands_assignment",
+  "version": "1.0.0",
+  "description": "For Adding personalize favorite bands ",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Ravi Tiwari",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^8.1.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.0",
+    "hbs": "^4.0.5",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.7.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "sequelize": "^5.19.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
+}
