@@ -25,6 +25,10 @@ app.use(passport.initialize());
  
 app.use(passport.session()); // persistent login sessions
 
+var passportConfig = require('./app/config/passport/passport');
+
+
+
 //connecting Flash
 app.use(flash());
 
@@ -38,7 +42,7 @@ app.use(flash());
 //Handle post requests using body parser
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', '.hbs');
+app.set('view engine', 'ejs');
 
 
 app.use(cookieParser());
@@ -53,7 +57,7 @@ var models = require("./app/models");
 
 
 //load passport strategies
-require('./app/config/passport/passport.js')(passport, models.users);
+//require('./app/config/passport/passport.js')(passport, models.users);
  
 //Sync Database
 models.sequelize.sync().then(function() {
@@ -69,8 +73,8 @@ models.sequelize.sync().then(function() {
  
 // Fetch all routes
 
-app.use('/',  require('./routes/index'));
-app.use('/users', require('./routes/user.js'));
+app.use('/',  require('./app/routes/index'));
+app.use('/user', require('./app/routes/user.js'));
 
  
  
