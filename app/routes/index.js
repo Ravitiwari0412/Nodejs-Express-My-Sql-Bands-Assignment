@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { ensureAuthenticated, forwardAuthenticated } = require('./config/checkAuth');
+
+
+
+var models = require('../models/index');
+
+const { ensureAuthenticated, forwardAuthenticated } = require('../config/checkAuth');
 
 // Welcome Page
-router.get('/', forwardAuthenticated, (req, res) => res.render('index'));
+router.get('/', forwardAuthenticated, (req, res) => res.render('index', { user: req.user }));
 
 // Dashboard
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
@@ -113,6 +118,13 @@ router.get('/createBands', ensureAuthenticated, function (req, res) {
         
     
     });
+
+    // Logout
+router.get('/logout', (req, res) => {
+  req.logout();
+  req.flash('success_msg', 'You are logged out');
+  res.redirect('/user/login');
+});
   
 
  module.exports = router;

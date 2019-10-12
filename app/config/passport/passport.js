@@ -4,7 +4,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 const bcrypt = require('bcryptjs')
 
-var models = require('..../app/models/index');
+var models = require('../../models/index');
 
 
 
