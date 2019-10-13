@@ -95,7 +95,90 @@ router.get('/createBands', ensureAuthenticated, function (req, res) {
   
   
   });
+
+
+  // Edit  Bands
+
+router.get('/editBands/:id', ensureAuthenticated, function (req, res, next) {
+  console.log("inside get editbands");
+
+  models.Bands.findOne({where: {id:req.params.id}})
+
+  .then(bands => {
+
+    if (bands.userId !== req.user.id){
+
+      return res.redirect('/dashboard');
+
+    }
+
+    res.render('editBands', 
+
+    { 
+
+      user: req.user,
+
+      Bands: bands,
+
+      error: req.flash('error')[0]
+
+    });
+
+  });
+
+});
   
+// Update bands 
+
+router.post('/editBands/:id', ensureAuthenticated,function (req, res, next) {  
+
+  console.log("inside post editbands");
+
+  models.Bands.findOne({where: {id:req.params.id}})
+
+  .then(bands => {
+
+    if (!req.body.name || !req.body.artist) {
+
+   
+
+     
+
+       return res.render('editBands', { user: req.user, Bands: bands,error: 'All fields required.' });
+
+    }   
+
+     if (!isNaN(req.body.artist)) {
+
+      return res.render('editBands', { user: req.user, Bands: bands,error: 'Artist name could not be numeric.' });
+
+     }
+
+ 
+
+      bands.update({
+
+      name: req.body.name,
+
+      artist: req.body.artist
+
+      }).then( ()=>{
+
+      res.redirect('/dashboard');
+
+    });
+
+    })
+
+    .catch((err) => {
+
+      console.log("Error editing band\n\n" + err);
+
+    });
+
+});
+
+
   
   router.get('/deleteBands/:id', function (req, res,next) {
   

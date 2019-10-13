@@ -139,19 +139,19 @@ router.post('/register', forwardAuthenticated, (req, res) => {
 
   if (!data.name || !data.dob || !data.email || !data.password) {
 
-    return res.render('register', { user: req.user, error: 'All fields required.' });
+    return res.render('signup', { user: req.user, error: 'All fields required.' });
 
   }
 
   if (new Date(data.dob) > new Date()){
 
-    return res.render('register', { user: req.user, error: 'Invalid DoB' });
+    return res.render('signup', { user: req.user, error: 'Invalid DoB' });
 
   }
 
   if (!EmailValidator(data.email)){
 
-    return res.render('register', { user: req.user, error: 'Invalid Email' });
+    return res.render('signup', { user: req.user, error: 'Invalid Email' });
 
   }
 
@@ -163,11 +163,11 @@ router.post('/register', forwardAuthenticated, (req, res) => {
 
     .then((user) => {
 
-      if (user) return res.render('register', { user: req.user, error: 'Email already exist' });
+      if (user) return res.render('signup', { user: req.user, error: 'Email already exist' });
 
       if (data.password < 3) {
 
-        return res.render('register', { user: req.user, error: 'Password must be greater than 3.' });
+        return res.render('signup', { user: req.user, error: 'Password must be greater than 3.' });
 
       }
 
